@@ -16,6 +16,7 @@
 
 package com.mood.tomoapp.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.stream.Collectors;
@@ -102,12 +103,39 @@ public class AppController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/transport")
     public Transport transport(@RequestBody Transport transport) {
+
+        Driver driver = drivers.findOne(transport.getDriver().getId());
+        transport.setDriver(driver);
+
+        Buyer buyer = buyers.findOne(transport.getBuyer().getId());
+        transport.setBuyer(buyer);
+
+        Truck truck = trucks.findOne(transport.getTruck().getId());
+        transport.setTruck(truck);
+
+        Owner owner = owners.findOne(transport.getOwner().getId());
+        transport.setOwner(owner);
+
+        transport.setTimestamp(LocalDateTime.now());
+
         return transports.save(transport);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/fuel")
     public Fuel fuel(@RequestBody Fuel fuel) {
+
+        Driver driver = drivers.findOne(fuel.getDriver().getId());
+        fuel.setDriver(driver);
+
+        Fueling fueling = fuelings.findOne(fuel.getFueling().getId());
+        fuel.setFueling(fueling);
+
+        Truck truck = trucks.findOne(fuel.getTruck().getId());
+        fuel.setTruck(truck);
+
+        fuel.setTimestamp(LocalDateTime.now());
+
         return fuels.save(fuel);
     }
 }
