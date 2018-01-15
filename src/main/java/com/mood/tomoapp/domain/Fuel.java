@@ -16,24 +16,129 @@
 
 package com.mood.tomoapp.domain;
 
-import java.util.Set;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Gorivo")
 public class Fuel {
 
     @Id
+    @Column(name = "GorivoId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    Set<Fueling> fuelings;
+    private Truck truck;
 
     @ManyToOne
-    Set<Driver> drivers;
+    private Fueling fueling;
+
+    @ManyToOne
+    private Driver driver;
+
+    @Column(name = "DatumTocenja")
+    private LocalDateTime date;
+
+    @Column(name = "Kolicina")
+    private Double quantity;
+
+    @Column(name = "Km")
+    private Integer km;
+
+    @Column(name = "FakturaSt")
+    private String facture;
+
+    @Column(name = "Opomba")
+    private String remark;
+
+    @Column(name = "DatumVpisa")
+    private LocalDateTime timestamp;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Truck getTruck() {
+        return truck;
+    }
+
+    public void setTruck(Truck truck) {
+        this.truck = truck;
+    }
+
+    public Fueling getFueling() {
+        return fueling;
+    }
+
+    public void setFueling(Fueling fueling) {
+        this.fueling = fueling;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public Double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getKm() {
+        return km;
+    }
+
+    public void setKm(Integer km) {
+        this.km = km;
+    }
+
+    public String getFacture() {
+        return facture;
+    }
+
+    public void setFacture(String facture) {
+        this.facture = facture;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 }

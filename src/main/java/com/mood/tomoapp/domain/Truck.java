@@ -16,23 +16,63 @@
 
 package com.mood.tomoapp.domain;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Kamion")
 public class Truck {
 
     @Id
+    @Column(name = "KamionId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "Kamion")
     private String truck;
 
-    @OneToMany
-    private Transport transport;
+    @OneToMany(mappedBy = "truck")
+    private Set<Transport> transports;
+
+    @OneToMany(mappedBy = "truck")
+    private Set<Fuel> fuels;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getTruck() {
+        return truck;
+    }
+
+    public void setTruck(String truck) {
+        this.truck = truck;
+    }
+
+    public Set<Transport> getTransports() {
+        return transports;
+    }
+
+    public void setTransports(Set<Transport> transports) {
+        this.transports = transports;
+    }
+
+    public Set<Fuel> getFuels() {
+        return fuels;
+    }
+
+    public void setFuels(Set<Fuel> fuels) {
+        this.fuels = fuels;
+    }
 }

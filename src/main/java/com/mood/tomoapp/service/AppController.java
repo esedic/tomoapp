@@ -21,7 +21,21 @@ import java.util.Spliterator;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import com.mood.tomoapp.domain.Buyer;
+import com.mood.tomoapp.domain.Driver;
 import com.mood.tomoapp.domain.Fuel;
+import com.mood.tomoapp.domain.Fueling;
+import com.mood.tomoapp.domain.Owner;
+import com.mood.tomoapp.domain.Transport;
+import com.mood.tomoapp.domain.Truck;
+import com.mood.tomoapp.repos.BuyerRepository;
+import com.mood.tomoapp.repos.DriverRepository;
+import com.mood.tomoapp.repos.FuelRepository;
+import com.mood.tomoapp.repos.FuelingRepository;
+import com.mood.tomoapp.repos.OwnerRepository;
+import com.mood.tomoapp.repos.TransportRepository;
+import com.mood.tomoapp.repos.TruckRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,25 +48,66 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api")
 public class AppController {
 
-    private final DbRepository repository;
+    @Autowired
+    private DriverRepository drivers;
 
-    public AppController(DbRepository repository) {
-        this.repository = repository;
+    @Autowired
+    private TruckRepository trucks;
+
+    @Autowired
+    private BuyerRepository buyers;
+
+    @Autowired
+    private OwnerRepository owners;
+
+    @Autowired
+    private FuelingRepository fuelings;
+
+    @Autowired
+    private TransportRepository transports;
+
+    @Autowired
+    private FuelRepository fuels;
+
+    private static <T> List<T> toList(Iterable<T> iterable) {
+        Spliterator<T> splits = iterable.spliterator();
+        return StreamSupport.stream(splits, false).collect(Collectors.toList());
     }
 
-    @GetMapping
-    public List<Fuel> getAll() {
-        Spliterator<Fuel> fruits = repository.findAll()
-                .spliterator();
+    @GetMapping("/drivers")
+    public List<Driver> getDrivers() {
+        return toList(drivers.findAll());
+    }
 
-        return StreamSupport
-                .stream(fruits, false)
-                .collect(Collectors.toList());
+    @GetMapping("/trucks")
+    public List<Truck> getTrucks() {
+        return toList(trucks.findAll());
+    }
+
+    @GetMapping("/buyers")
+    public List<Buyer> getBuyers() {
+        return toList(buyers.findAll());
+    }
+
+    @GetMapping("/owners")
+    public List<Owner> getOwners() {
+        return toList(owners.findAll());
+    }
+
+    @GetMapping("/fuelings")
+    public List<Fueling> getFuelings() {
+        return toList(fuelings.findAll());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
-    public Fuel post(@RequestBody(required = false) Fuel fruit) {
-        return repository.save(fruit);
+    @PostMapping("/transport")
+    public Transport transport(@RequestBody Transport transport) {
+        return transports.save(transport);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/fuel")
+    public Fuel fuel(@RequestBody Fuel fuel) {
+        return fuels.save(fuel);
     }
 }
