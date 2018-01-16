@@ -18,9 +18,6 @@ package com.mood.tomoapp.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Spliterator;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import com.mood.tomoapp.domain.Buyer;
 import com.mood.tomoapp.domain.Driver;
@@ -29,15 +26,8 @@ import com.mood.tomoapp.domain.Fueling;
 import com.mood.tomoapp.domain.Owner;
 import com.mood.tomoapp.domain.Transport;
 import com.mood.tomoapp.domain.Truck;
-import com.mood.tomoapp.repos.BuyerRepository;
-import com.mood.tomoapp.repos.DriverRepository;
-import com.mood.tomoapp.repos.FuelRepository;
-import com.mood.tomoapp.repos.FuelingRepository;
-import com.mood.tomoapp.repos.OwnerRepository;
-import com.mood.tomoapp.repos.TransportRepository;
-import com.mood.tomoapp.repos.TruckRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,33 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api")
-public class AppController {
-
-    @Autowired
-    private DriverRepository drivers;
-
-    @Autowired
-    private TruckRepository trucks;
-
-    @Autowired
-    private BuyerRepository buyers;
-
-    @Autowired
-    private OwnerRepository owners;
-
-    @Autowired
-    private FuelingRepository fuelings;
-
-    @Autowired
-    private TransportRepository transports;
-
-    @Autowired
-    private FuelRepository fuels;
-
-    private static <T> List<T> toList(Iterable<T> iterable) {
-        Spliterator<T> splits = iterable.spliterator();
-        return StreamSupport.stream(splits, false).collect(Collectors.toList());
-    }
+public class AppController extends AbstractController {
 
     @GetMapping("/drivers")
     public List<Driver> getDrivers() {
@@ -102,6 +66,7 @@ public class AppController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/transport")
+    @Transactional
     public Transport transport(@RequestBody Transport transport) {
 
         Driver driver = drivers.findOne(transport.getDriver().getId());
@@ -123,6 +88,7 @@ public class AppController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/fuel")
+    @Transactional
     public Fuel fuel(@RequestBody Fuel fuel) {
 
         Driver driver = drivers.findOne(fuel.getDriver().getId());
