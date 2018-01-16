@@ -26,6 +26,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Kamion")
 public class Truck {
@@ -38,9 +40,11 @@ public class Truck {
     @Column(name = "Kamion")
     private String truck;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "truck")
     private Set<Transport> transports;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "truck")
     private Set<Fuel> fuels;
 

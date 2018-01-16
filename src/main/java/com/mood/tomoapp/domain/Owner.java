@@ -26,12 +26,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name = "Kupec")
+@Table(name = "Lastnik")
 public class Owner {
 
     @Id
-    @Column(name = "KupecId")
+    @Column(name = "LastnikId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -41,6 +43,7 @@ public class Owner {
     @Column(name = "Aktiven")
     private int active;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "owner")
     private Set<Transport> transports;
 

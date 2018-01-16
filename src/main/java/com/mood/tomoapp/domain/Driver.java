@@ -26,6 +26,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Voznik")
 public class Driver {
@@ -38,9 +40,11 @@ public class Driver {
     @Column(name = "Voznik")
     private String driver;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "driver")
     private Set<Transport> transports;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "driver")
     private Set<Fuel> fuels;
 
