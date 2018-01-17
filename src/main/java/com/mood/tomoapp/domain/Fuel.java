@@ -26,6 +26,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mood.tomoapp.config.LocalDateTimeHelper;
+
 @Entity
 @Table(name = "Gorivo")
 public class Fuel {
@@ -44,6 +49,8 @@ public class Fuel {
     @ManyToOne
     private Driver driver;
 
+    @JsonSerialize(using = LocalDateTimeHelper.Serializer.class)
+    @JsonDeserialize(using = LocalDateTimeHelper.Deserializer.class)
     @Column(name = "DatumTocenja")
     private LocalDateTime date;
 
@@ -59,6 +66,7 @@ public class Fuel {
     @Column(name = "Opomba")
     private String remark;
 
+    @JsonIgnore
     @Column(name = "DatumVpisa")
     private LocalDateTime timestamp;
 
