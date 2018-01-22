@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tomo Les app</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<form action="#" th:action="@{/view/transport}" th:object="${transport}" method="post">
+    <div>
+        <label th:for="${#ids.next('driver')}">Voznik</label>
+        <select th:field="*{driver}">
+            <option th:each="driver : ${drivers}"
+                    th:value="${driver.id}"
+                    th:text="${driver.driver}"/>
+        </select>
+    </div>
+    <div>
+        <label th:for="${#ids.next('truck')}">Kamion</label>
+        <select th:field="*{truck}">
+            <option th:each="truck : ${trucks}"
+                    th:value="${truck.id}"
+                    th:text="${truck.truck}"/>
+        </select>
+    </div>
+    <div>
+        <label th:for="${#ids.next('buyer')}">Kupec</label>
+        <select th:field="*{buyer}">
+            <option th:each="buyer : ${buyers}"
+                    th:value="${buyer.id}"
+                    th:text="${buyer.buyer}"/>
+        </select>
+    </div>
+    <div>
+        <label th:for="${#ids.next('owner')}">Lastnik</label>
+        <select th:field="*{owner}">
+            <option th:each="owner : ${owners}"
+                    th:value="${owner.id}"
+                    th:text="${owner.owner}"/>
+        </select>
+    </div>
+    <div>
+        <label th:for="${#ids.next('locationIn')}">Kraj nakladanja</label>
+        <input type="text" th:field="*{locationIn}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('dateIn')}">Datum nakladanja</label>
+        <input type="text" th:field="*{dateIn}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('locationOut')}">Kraj razkladanja</label>
+        <input type="text" th:field="*{locationOut}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('dateOut')}">Datum razkladanja</label>
+        <input type="text" th:field="*{dateOut}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('assortment')}">Sortiment</label>
+        <input type="text" th:field="*{assortment}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('quantity')}">Kolicina</label>
+        <input type="text" th:field="*{quantity}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('remark')}">Opomba</label>
+        <input type="text" th:field="*{remark}"/>
+    </div>
+    <button type="submit" name="transport">Prevoz</button>
+</form>
+<p/>
+-------------------
+<p/>
+<form action="#" th:action="@{/view/fuel}" th:object="${fuel}" method="post">
+    <div>
+        <label th:for="${#ids.next('driver')}">Voznik</label>
+        <select th:field="*{driver}">
+            <option th:each="driver : ${drivers}"
+                    th:value="${driver.id}"
+                    th:text="${driver.driver}"/>
+        </select>
+    </div>
+    <div>
+        <label th:for="${#ids.next('truck')}">Kamion</label>
+        <select th:field="*{truck}">
+            <option th:each="truck : ${trucks}"
+                    th:value="${truck.id}"
+                    th:text="${truck.truck}"/>
+        </select>
+    </div>
+    <div>
+        <label th:for="${#ids.next('fueling')}">Tocenje</label>
+        <select th:field="*{fueling}">
+            <option th:each="fueling : ${fuelings}"
+                    th:value="${fueling.id}"
+                    th:text="${fueling.fueling}"/>
+        </select>
+    </div>
+    <div>
+        <label th:for="${#ids.next('date')}">Datum tocenja</label>
+        <input type="text" th:field="*{date}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('quantity')}">Kolicina</label>
+        <input type="text" th:field="*{quantity}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('km')}">Km</label>
+        <input type="text" th:field="*{km}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('facture')}">FakturaSt</label>
+        <input type="text" th:field="*{facture}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('remark')}">Opomba</label>
+        <input type="text" th:field="*{remark}"/>
+    </div>
+    <button type="submit" name="transport">Gorivo</button>
+</form>
+</body>
+</html>

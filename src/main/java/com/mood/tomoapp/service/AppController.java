@@ -16,7 +16,6 @@
 
 package com.mood.tomoapp.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import com.mood.tomoapp.domain.Buyer;
@@ -69,19 +68,13 @@ public class AppController extends AbstractController {
     @Transactional
     public Transport transport(@RequestBody Transport transport) {
 
-        Driver driver = drivers.findOne(transport.getDriver().getId());
-        transport.setDriver(driver);
-
-        Buyer buyer = buyers.findOne(transport.getBuyer().getId());
-        transport.setBuyer(buyer);
-
-        Truck truck = trucks.findOne(transport.getTruck().getId());
-        transport.setTruck(truck);
-
-        Owner owner = owners.findOne(transport.getOwner().getId());
-        transport.setOwner(owner);
-
-        transport.setTimestamp(LocalDateTime.now());
+        fillTransport(
+            transport,
+            transport.getDriver().getId(),
+            transport.getBuyer().getId(),
+            transport.getTruck().getId(),
+            transport.getOwner().getId()
+        );
 
         return transports.save(transport);
     }
@@ -91,16 +84,11 @@ public class AppController extends AbstractController {
     @Transactional
     public Fuel fuel(@RequestBody Fuel fuel) {
 
-        Driver driver = drivers.findOne(fuel.getDriver().getId());
-        fuel.setDriver(driver);
-
-        Fueling fueling = fuelings.findOne(fuel.getFueling().getId());
-        fuel.setFueling(fueling);
-
-        Truck truck = trucks.findOne(fuel.getTruck().getId());
-        fuel.setTruck(truck);
-
-        fuel.setTimestamp(LocalDateTime.now());
+        fillFuel(fuel,
+            fuel.getDriver().getId(),
+            fuel.getTruck().getId(),
+            fuel.getFueling().getId()
+        );
 
         return fuels.save(fuel);
     }

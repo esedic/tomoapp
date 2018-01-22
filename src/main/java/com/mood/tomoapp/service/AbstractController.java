@@ -16,11 +16,19 @@
 
 package com.mood.tomoapp.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import com.mood.tomoapp.domain.Buyer;
+import com.mood.tomoapp.domain.Driver;
+import com.mood.tomoapp.domain.Fuel;
+import com.mood.tomoapp.domain.Fueling;
+import com.mood.tomoapp.domain.Owner;
+import com.mood.tomoapp.domain.Transport;
+import com.mood.tomoapp.domain.Truck;
 import com.mood.tomoapp.repos.BuyerRepository;
 import com.mood.tomoapp.repos.DriverRepository;
 import com.mood.tomoapp.repos.FuelRepository;
@@ -57,4 +65,35 @@ public class AbstractController {
         Spliterator<T> splits = iterable.spliterator();
         return StreamSupport.stream(splits, false).collect(Collectors.toList());
     }
+
+    protected void fillTransport(Transport transport, int driverId, int buyerId, int truckId, int ownerId) {
+        Driver driver = drivers.findOne(driverId);
+        transport.setDriver(driver);
+
+        Buyer buyer = buyers.findOne(buyerId);
+        transport.setBuyer(buyer);
+
+        Truck truck = trucks.findOne(truckId);
+        transport.setTruck(truck);
+
+        Owner owner = owners.findOne(ownerId);
+        transport.setOwner(owner);
+
+        transport.setTimestamp(LocalDateTime.now());
+    }
+
+
+    protected void fillFuel(Fuel fuel, int driverId, int truckId, int fuelingId) {
+        Driver driver = drivers.findOne(driverId);
+        fuel.setDriver(driver);
+
+        Truck truck = trucks.findOne(truckId);
+        fuel.setTruck(truck);
+
+        Fueling fueling = fuelings.findOne(fuelingId);
+        fuel.setFueling(fueling);
+
+        fuel.setTimestamp(LocalDateTime.now());
+    }
+
 }
