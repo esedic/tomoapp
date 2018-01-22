@@ -1,5 +1,10 @@
 package com.mood.tomoapp.mvc;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import com.mood.tomoapp.config.LocalDateHelper;
+import com.mood.tomoapp.config.LocalDateTimeHelper;
 import com.mood.tomoapp.domain.Fuel;
 import com.mood.tomoapp.domain.Transport;
 import com.mood.tomoapp.model.FuelModel;
@@ -9,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,6 +25,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class ViewController extends AbstractController {
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(LocalDate.class, new LocalDateHelper());
+        binder.registerCustomEditor(LocalDateTime.class, new LocalDateTimeHelper());
+    }
+
     @GetMapping("/")
     public String index(Model model) {
         // models
@@ -63,7 +76,7 @@ public class ViewController extends AbstractController {
     }
 
     @RequestMapping(value = "/view/fuel", method = RequestMethod.POST)
-    public String transport(FuelModel fuel, final BindingResult bindingResult, final ModelMap model) {
+    public String fuel(FuelModel fuel, final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {
             model.put("status", "ERROR");
         } else {

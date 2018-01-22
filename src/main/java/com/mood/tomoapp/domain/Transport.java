@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,6 +32,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mood.tomoapp.config.LocalDateHelper;
+import com.mood.tomoapp.config.LocalDateTimeHelper;
 
 @Entity
 @Table(name = "Prevoz")
@@ -58,6 +60,7 @@ public class Transport {
 
     @JsonSerialize(using = LocalDateHelper.Serializer.class)
     @JsonDeserialize(using = LocalDateHelper.Deserializer.class)
+    @Convert(converter = LocalDateHelper.class)
     @Column(name = "DatumNakladanja")
     private LocalDate dateIn;
 
@@ -66,6 +69,7 @@ public class Transport {
 
     @JsonSerialize(using = LocalDateHelper.Serializer.class)
     @JsonDeserialize(using = LocalDateHelper.Deserializer.class)
+    @Convert(converter = LocalDateHelper.class)
     @Column(name = "DatumRazkladanja")
     private LocalDate dateOut;
 
@@ -79,6 +83,7 @@ public class Transport {
     private String remark;
 
     @JsonIgnore
+    @Convert(converter = LocalDateTimeHelper.class)
     @Column(name = "DatumVpisa")
     private LocalDateTime timestamp;
 

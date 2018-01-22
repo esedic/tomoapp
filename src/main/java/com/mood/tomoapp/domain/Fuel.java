@@ -19,6 +19,7 @@ package com.mood.tomoapp.domain;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,6 +52,7 @@ public class Fuel {
 
     @JsonSerialize(using = LocalDateTimeHelper.Serializer.class)
     @JsonDeserialize(using = LocalDateTimeHelper.Deserializer.class)
+    @Convert(converter = LocalDateTimeHelper.class)
     @Column(name = "DatumTocenja")
     private LocalDateTime date;
 
@@ -67,6 +69,7 @@ public class Fuel {
     private String remark;
 
     @JsonIgnore
+    @Convert(converter = LocalDateTimeHelper.class)
     @Column(name = "DatumVpisa")
     private LocalDateTime timestamp;
 
