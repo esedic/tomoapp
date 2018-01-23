@@ -30,6 +30,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class ViewController extends AbstractController {
+
+    private Integer getDriver(HttpSession session) {
+        Driver driver = (Driver) session.getAttribute(AuthFilter.KEY);
+        return driver.getId();
+    }
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(LocalDate.class, new LocalDateHelper());
@@ -75,14 +81,14 @@ public class ViewController extends AbstractController {
     }
 
     @RequestMapping(value = "/view/transport", method = RequestMethod.POST)
-    public String transport(TransportModel transport, final BindingResult bindingResult, final ModelMap model) {
+    public String transport(HttpSession session, TransportModel transport, final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {
             model.put("status", "ERROR");
         } else {
             Transport newTransport = new Transport();
             fillTransport(
                 newTransport,
-                transport.getDriver(),
+                getDriver(session),
                 transport.getBuyer(),
                 transport.getTruck(),
                 transport.getOwner()
@@ -103,14 +109,14 @@ public class ViewController extends AbstractController {
     }
 
     @RequestMapping(value = "/view/fuel", method = RequestMethod.POST)
-    public String fuel(FuelModel fuel, final BindingResult bindingResult, final ModelMap model) {
+    public String fuel(HttpSession session, FuelModel fuel, final BindingResult bindingResult, final ModelMap model) {
         if (bindingResult.hasErrors()) {
             model.put("status", "ERROR");
         } else {
             Fuel newFuel = new Fuel();
             fillFuel(
                 newFuel,
-                fuel.getDriver(),
+                getDriver(session),
                 fuel.getTruck(),
                 fuel.getFueling()
             );

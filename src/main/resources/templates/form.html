@@ -7,14 +7,6 @@
 <body>
 <form action="#" th:action="@{/view/transport}" th:object="${transport}" method="post">
     <div>
-        <label th:for="${#ids.next('driver')}">Voznik</label>
-        <select th:field="*{driver}">
-            <option th:each="driver : ${drivers}"
-                    th:value="${driver.id}"
-                    th:text="${driver.driver}"/>
-        </select>
-    </div>
-    <div>
         <label th:for="${#ids.next('truck')}">Kamion</label>
         <select th:field="*{truck}">
             <option th:each="truck : ${trucks}"
@@ -66,20 +58,12 @@
         <label th:for="${#ids.next('remark')}">Opomba</label>
         <input type="text" th:field="*{remark}"/>
     </div>
-    <button type="submit" name="transport">Prevoz</button>
+    <button type="submit" name="transportbtn">Prevoz</button>
 </form>
 <p/>
 -------------------
 <p/>
 <form action="#" th:action="@{/view/fuel}" th:object="${fuel}" method="post">
-    <div>
-        <label th:for="${#ids.next('driver')}">Voznik</label>
-        <select th:field="*{driver}">
-            <option th:each="driver : ${drivers}"
-                    th:value="${driver.id}"
-                    th:text="${driver.driver}"/>
-        </select>
-    </div>
     <div>
         <label th:for="${#ids.next('truck')}">Kamion</label>
         <select th:field="*{truck}">
@@ -116,7 +100,7 @@
         <label th:for="${#ids.next('remark')}">Opomba</label>
         <input type="text" th:field="*{remark}"/>
     </div>
-    <button type="submit" name="transport">Gorivo</button>
+    <button type="submit" name="fuelbtn">Gorivo</button>
 </form>
 </body>
 </html>
