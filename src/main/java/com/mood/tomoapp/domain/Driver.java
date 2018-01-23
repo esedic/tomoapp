@@ -40,6 +40,9 @@ public class Driver {
     @Column(name = "Voznik")
     private String driver;
 
+    @Column(name = "Geslo")
+    private String password;
+
     @JsonIgnore
     @OneToMany(mappedBy = "driver")
     private Set<Transport> transports;
@@ -62,6 +65,14 @@ public class Driver {
 
     public void setDriver(String driver) {
         this.driver = driver;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Set<Transport> getTransports() {

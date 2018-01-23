@@ -16,8 +16,13 @@
 
 package com.mood.tomoapp;
 
+import java.util.Collections;
+
+import com.mood.tomoapp.mvc.AuthFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
@@ -28,4 +33,10 @@ public class TomoApplication {
         SpringApplication.run(TomoApplication.class, args);
     }
 
+    @Bean
+    public FilterRegistrationBean authFilter() {
+        FilterRegistrationBean frb = new FilterRegistrationBean(new AuthFilter());
+        frb.setUrlPatterns(Collections.singleton("/view/*"));
+        return frb;
+    }
 }

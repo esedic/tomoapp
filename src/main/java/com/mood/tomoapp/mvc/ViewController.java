@@ -2,11 +2,16 @@ package com.mood.tomoapp.mvc;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
 
 import com.mood.tomoapp.config.LocalDateHelper;
 import com.mood.tomoapp.config.LocalDateTimeHelper;
+import com.mood.tomoapp.domain.Driver;
 import com.mood.tomoapp.domain.Fuel;
 import com.mood.tomoapp.domain.Transport;
+import com.mood.tomoapp.model.DriverModel;
 import com.mood.tomoapp.model.FuelModel;
 import com.mood.tomoapp.model.TransportModel;
 import com.mood.tomoapp.service.AbstractController;
@@ -32,7 +37,12 @@ public class ViewController extends AbstractController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index() {
+        return "redirect:/view/form";
+    }
+
+    @GetMapping("/view/form")
+    public String form(Model model) {
         // models
         model.addAttribute("transport", new TransportModel());
         model.addAttribute("fuel", new FuelModel());
@@ -44,7 +54,24 @@ public class ViewController extends AbstractController {
         model.addAttribute("owners", toList(owners.findAll()));
         model.addAttribute("fuelings", toList(fuelings.findAll()));
 
-        return "index";
+        return "form";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("driver", new DriverModel());
+        return "login";
+    }
+
+    @RequestMapping(value = "/signin", method = RequestMethod.POST)
+    public String signin(HttpSession session, DriverModel driver) {
+        Optional<Driver> user = drivers.findByDriverAndPassword(driver.getDriver(), driver.getPassword());
+        if (user.isPresent()) {
+            session.setAttribute(AuthFilter.KEY, user.get());
+            return "redirect:/view/form";
+        } else {
+            return "redirect:/login";
+        }
     }
 
     @RequestMapping(value = "/view/transport", method = RequestMethod.POST)

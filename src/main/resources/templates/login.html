@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tomo Les app - login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<form action="#" th:action="@{/signin}" th:object="${driver}" method="post">
+    <div>
+        <label th:for="${#ids.next('driver')}">Voznik</label>
+        <input type="text" th:field="*{driver}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('password')}">Geslo</label>
+        <input type="password" th:field="*{password}"/>
+    </div>
+    <button type="submit" name="driver">Prijavi!</button>
+</form>
+</body>
+</html>
