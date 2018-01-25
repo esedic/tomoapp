@@ -58,10 +58,9 @@
     </dependency -->
 
     <dependency>
-      <groupId>com.microsoft.sqlserver</groupId>
-      <artifactId>mssql-jdbc</artifactId>
-      <version>${mssql.version}</version>
-      <scope>runtime</scope>
+      <groupId>com.google.cloud.sql</groupId>
+      <artifactId>mysql-socket-factory-connector-j-6</artifactId>
+      <version>1.0.5</version>
     </dependency>
 
   </dependencies>
