@@ -8,6 +8,6 @@ spec:
   to:
     kind: Service
     name: ${project.artifactId}
-  tsl:
+  tls:
     transport: edge
     insecureEdgeTerminationPolicy: Redirect
