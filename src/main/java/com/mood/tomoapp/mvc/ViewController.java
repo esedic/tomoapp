@@ -31,11 +31,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ViewController extends AbstractController {
 
-    private Integer getDriver(HttpSession session) {
-        Driver driver = (Driver) session.getAttribute(AuthFilter.KEY);
-        return driver.getId();
-    }
-
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(LocalDate.class, new LocalDateHelper());
@@ -54,11 +49,11 @@ public class ViewController extends AbstractController {
         model.addAttribute("fuel", new FuelModel());
 
         // drop downs
-        model.addAttribute("drivers", toList(drivers.findAll()));
-        model.addAttribute("trucks", toList(trucks.findAll()));
-        model.addAttribute("buyers", toList(buyers.findAll()));
-        model.addAttribute("owners", toList(owners.findAll()));
-        model.addAttribute("fuelings", toList(fuelings.findAll()));
+        model.addAttribute("drivers", drivers.findByActiveIsGreaterThan(0));
+        model.addAttribute("trucks", trucks.findByActiveIsGreaterThan(0));
+        model.addAttribute("buyers", buyers.findByActiveIsGreaterThan(0));
+        model.addAttribute("owners", owners.findByActiveIsGreaterThan(0));
+        model.addAttribute("fuelings", fuelings.findByActiveIsGreaterThan(0));
 
         return "form";
     }
@@ -71,9 +66,9 @@ public class ViewController extends AbstractController {
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public String signin(HttpSession session, DriverModel driver) {
-        Optional<Driver> user = drivers.findByDriverAndPassword(driver.getDriver(), driver.getPassword());
+        Optional<Driver> user = drivers.findByDriverAndPasswordAndActiveIsGreaterThan(driver.getDriver(), driver.getPassword(), 0);
         if (user.isPresent()) {
-            session.setAttribute(AuthFilter.KEY, user.get());
+            AuthFilter.setDriverId(session, user.get().getId());
             return "redirect:/view/form";
         } else {
             return "redirect:/login";
@@ -88,7 +83,7 @@ public class ViewController extends AbstractController {
             Transport newTransport = new Transport();
             fillTransport(
                 newTransport,
-                getDriver(session),
+                AuthFilter.getDriverId(session),
                 transport.getBuyer(),
                 transport.getTruck(),
                 transport.getOwner()
@@ -116,7 +111,7 @@ public class ViewController extends AbstractController {
             Fuel newFuel = new Fuel();
             fillFuel(
                 newFuel,
-                getDriver(session),
+                AuthFilter.getDriverId(session),
                 fuel.getTruck(),
                 fuel.getFueling()
             );

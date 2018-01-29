@@ -16,6 +16,7 @@
 
 package com.mood.tomoapp.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -30,6 +31,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mood.tomoapp.config.LocalDateHelper;
 import com.mood.tomoapp.config.LocalDateTimeHelper;
 
 @Entity
@@ -50,11 +52,11 @@ public class Fuel {
     @ManyToOne
     private Driver driver;
 
-    @JsonSerialize(using = LocalDateTimeHelper.Serializer.class)
-    @JsonDeserialize(using = LocalDateTimeHelper.Deserializer.class)
-    @Convert(converter = LocalDateTimeHelper.class)
+    @JsonSerialize(using = LocalDateHelper.Serializer.class)
+    @JsonDeserialize(using = LocalDateHelper.Deserializer.class)
+    @Convert(converter = LocalDateHelper.class)
     @Column(name = "DatumTocenja")
-    private LocalDateTime date;
+    private LocalDate date;
 
     @Column(name = "Kolicina")
     private Double quantity;
@@ -105,11 +107,11 @@ public class Fuel {
         this.driver = driver;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

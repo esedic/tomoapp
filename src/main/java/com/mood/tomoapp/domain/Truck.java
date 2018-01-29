@@ -40,6 +40,9 @@ public class Truck {
     @Column(name = "Kamion")
     private String truck;
 
+    @Column(name = "Aktiven")
+    private int active;
+
     @JsonIgnore
     @OneToMany(mappedBy = "truck")
     private Set<Transport> transports;
@@ -62,6 +65,14 @@ public class Truck {
 
     public void setTruck(String truck) {
         this.truck = truck;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
     }
 
     public Set<Transport> getTransports() {

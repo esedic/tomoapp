@@ -40,6 +40,9 @@ public class Fueling {
     @Column(name = "Tocenje")
     private String fueling;
 
+    @Column(name = "Aktiven")
+    private int active;
+
     @JsonIgnore
     @OneToMany(mappedBy = "fueling")
     private Set<Fuel> fuels;
@@ -58,6 +61,14 @@ public class Fueling {
 
     public void setFueling(String fueling) {
         this.fueling = fueling;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
     }
 
     public Set<Fuel> getFuels() {

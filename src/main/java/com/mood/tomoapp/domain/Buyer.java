@@ -40,6 +40,9 @@ public class Buyer {
     @Column(name = "Kupec")
     private String buyer;
 
+    @Column(name = "Aktiven")
+    private int active;
+
     @JsonIgnore
     @OneToMany(mappedBy = "buyer")
     private Set<Transport> transports;
@@ -58,6 +61,14 @@ public class Buyer {
 
     public void setBuyer(String buyer) {
         this.buyer = buyer;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
     }
 
     public Set<Transport> getTransports() {

@@ -40,27 +40,27 @@ public class AppController extends AbstractController {
 
     @GetMapping("/drivers")
     public List<Driver> getDrivers() {
-        return toList(drivers.findAll());
+        return drivers.findByActiveIsGreaterThan(0);
     }
 
     @GetMapping("/trucks")
     public List<Truck> getTrucks() {
-        return toList(trucks.findAll());
+        return trucks.findByActiveIsGreaterThan(0);
     }
 
     @GetMapping("/buyers")
     public List<Buyer> getBuyers() {
-        return toList(buyers.findAll());
+        return buyers.findByActiveIsGreaterThan(0);
     }
 
     @GetMapping("/owners")
     public List<Owner> getOwners() {
-        return toList(owners.findAll());
+        return owners.findByActiveIsGreaterThan(0);
     }
 
     @GetMapping("/fuelings")
     public List<Fueling> getFuelings() {
-        return toList(fuelings.findAll());
+        return fuelings.findByActiveIsGreaterThan(0);
     }
 
     @ResponseStatus(HttpStatus.CREATED)

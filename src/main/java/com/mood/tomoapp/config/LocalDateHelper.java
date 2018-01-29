@@ -1,10 +1,16 @@
 package com.mood.tomoapp.config;
 
+import static java.time.temporal.ChronoField.DAY_OF_MONTH;
+import static java.time.temporal.ChronoField.MONTH_OF_YEAR;
+import static java.time.temporal.ChronoField.YEAR;
+
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.SignStyle;
 
 import javax.persistence.AttributeConverter;
 
@@ -19,6 +25,22 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
  */
 public class LocalDateHelper extends PropertyEditorSupport implements AttributeConverter<LocalDate, Date> {
+    private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
+        .appendValue(DAY_OF_MONTH, 1, 2, SignStyle.NEVER)
+        .appendLiteral('.')
+        .appendValue(MONTH_OF_YEAR, 1, 2, SignStyle.NEVER)
+        .appendLiteral('.')
+        .appendValue(YEAR, 4)
+        .toFormatter();
+
+    private static LocalDate parse(String text) {
+        return LocalDate.parse(text, FORMATTER);
+    }
+
+    private static String format(LocalDate date) {
+        return date.format(FORMATTER);
+    }
+
     @Override
     public Date convertToDatabaseColumn(LocalDate locDate) {
         return (locDate == null ? null : Date.valueOf(locDate));
@@ -32,7 +54,7 @@ public class LocalDateHelper extends PropertyEditorSupport implements AttributeC
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
         if (text != null) {
-            setValue(LocalDate.parse(text));
+            setValue(parse(text));
         }
     }
 
@@ -41,20 +63,20 @@ public class LocalDateHelper extends PropertyEditorSupport implements AttributeC
         if (getValue() == null) {
             return null;
         }
-        return LocalDate.class.cast(getValue()).format(DateTimeFormatter.ISO_LOCAL_DATE);
+        return format(LocalDate.class.cast(getValue()));
     }
 
     public static class Serializer extends JsonSerializer<LocalDate> {
         @Override
         public void serialize(LocalDate value, JsonGenerator gen, SerializerProvider serializerProvider) throws IOException {
-            gen.writeString(value.format(DateTimeFormatter.ISO_LOCAL_DATE));
+            gen.writeString(format(value));
         }
     }
 
     public static class Deserializer extends JsonDeserializer<LocalDate> {
         @Override
         public LocalDate deserialize(JsonParser jp, DeserializationContext deserializationContext) throws IOException {
-            return LocalDate.parse(jp.readValueAs(String.class));
+            return parse(jp.readValueAs(String.class));
         }
     }
 }

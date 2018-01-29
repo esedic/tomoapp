@@ -16,7 +16,7 @@
 
 package com.mood.tomoapp.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class FuelModel {
     private Integer truck;
@@ -25,7 +25,7 @@ public class FuelModel {
 
     private Integer driver;
 
-    private LocalDateTime date;
+    private LocalDate date;
 
     private Double quantity;
 
@@ -59,11 +59,11 @@ public class FuelModel {
         this.driver = driver;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
