@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tomo Les app</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<form action="#" th:action="@{/view/fuel}" th:object="${fuel}" method="post">
+    <div>
+        <label th:for="${#ids.next('truck')}">Kamion</label>
+        <select th:field="*{truck}">
+            <option th:each="truck : ${trucks}"
+                    th:value="${truck.id}"
+                    th:text="${truck.truck}"/>
+        </select>
+    </div>
+    <div>
+        <label th:for="${#ids.next('fueling')}">Tocenje</label>
+        <select th:field="*{fueling}">
+            <option th:each="fueling : ${fuelings}"
+                    th:value="${fueling.id}"
+                    th:text="${fueling.fueling}"/>
+        </select>
+    </div>
+    <div>
+        <label th:for="${#ids.next('date')}">Datum tocenja</label>
+        <input type="text" th:field="*{date}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('quantity')}">Kolicina</label>
+        <input type="text" th:field="*{quantity}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('km')}">Km</label>
+        <input type="text" th:field="*{km}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('facture')}">FakturaSt</label>
+        <input type="text" th:field="*{facture}"/>
+    </div>
+    <div>
+        <label th:for="${#ids.next('remark')}">Opomba</label>
+        <input type="text" th:field="*{remark}"/>
+    </div>
+    <button type="submit" name="fuelbtn">Poslji</button>
+    <button type="reset" name="fuelbtn_reset">Brisi</button>
+</form>
+<p/>
+<a href="/view/menu">[Nazaj]</a>
+</body>
+</html>

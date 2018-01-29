@@ -55,6 +55,9 @@ public class Transport {
     @ManyToOne
     private Owner owner;
 
+    @ManyToOne
+    private Payer payer;
+
     @Column(name = "KrajNakladanja")
     private String locationIn;
 
@@ -125,6 +128,14 @@ public class Transport {
 
     public void setOwner(Owner owner) {
         this.owner = owner;
+    }
+
+    public Payer getPayer() {
+        return payer;
+    }
+
+    public void setPayer(Payer payer) {
+        this.payer = payer;
     }
 
     public String getLocationIn() {

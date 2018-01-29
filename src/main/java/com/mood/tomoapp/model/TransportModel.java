@@ -24,6 +24,7 @@ public class TransportModel {
     private Integer buyer;
     private Integer truck;
     private Integer owner;
+    private Integer payer;
 
     private String locationIn;
     private LocalDate dateIn;
@@ -67,6 +68,14 @@ public class TransportModel {
 
     public void setOwner(Integer owner) {
         this.owner = owner;
+    }
+
+    public Integer getPayer() {
+        return payer;
+    }
+
+    public void setPayer(Integer payer) {
+        this.payer = payer;
     }
 
     public String getLocationIn() {

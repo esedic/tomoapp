@@ -20,6 +20,7 @@ import com.mood.tomoapp.domain.Buyer;
 import com.mood.tomoapp.domain.Driver;
 import com.mood.tomoapp.domain.Fueling;
 import com.mood.tomoapp.domain.Owner;
+import com.mood.tomoapp.domain.Payer;
 import com.mood.tomoapp.domain.Truck;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,6 +63,12 @@ public class CrudController extends AbstractController {
     @PostMapping("/addFueling")
     public Fueling add(@RequestBody Fueling fueling) {
         return fuelings.save(fueling);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/addPayer")
+    public Payer add(@RequestBody Payer payer) {
+        return payers.save(payer);
     }
 
 }

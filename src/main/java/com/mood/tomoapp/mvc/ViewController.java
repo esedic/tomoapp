@@ -39,23 +39,40 @@ public class ViewController extends AbstractController {
 
     @GetMapping("/")
     public String index() {
-        return "redirect:/view/form";
+        return "redirect:/view/menu";
     }
 
-    @GetMapping("/view/form")
-    public String form(Model model) {
+    @GetMapping("/view/menu")
+    public String menu() {
+        return "menu";
+    }
+
+    @GetMapping("/view/tf")
+    public String transportForm(Model model) {
         // models
         model.addAttribute("transport", new TransportModel());
-        model.addAttribute("fuel", new FuelModel());
 
         // drop downs
         model.addAttribute("drivers", drivers.findByActiveIsGreaterThan(0));
         model.addAttribute("trucks", trucks.findByActiveIsGreaterThan(0));
         model.addAttribute("buyers", buyers.findByActiveIsGreaterThan(0));
         model.addAttribute("owners", owners.findByActiveIsGreaterThan(0));
+        model.addAttribute("payers", payers.findByActiveIsGreaterThan(0));
+
+        return "transport";
+    }
+
+    @GetMapping("/view/ff")
+    public String fuelForm(Model model) {
+        // models
+        model.addAttribute("fuel", new FuelModel());
+
+        // drop downs
+        model.addAttribute("drivers", drivers.findByActiveIsGreaterThan(0));
+        model.addAttribute("trucks", trucks.findByActiveIsGreaterThan(0));
         model.addAttribute("fuelings", fuelings.findByActiveIsGreaterThan(0));
 
-        return "form";
+        return "fuel";
     }
 
     @GetMapping("/login")
@@ -69,7 +86,7 @@ public class ViewController extends AbstractController {
         Optional<Driver> user = drivers.findByDriverAndPasswordAndActiveIsGreaterThan(driver.getDriver(), driver.getPassword(), 0);
         if (user.isPresent()) {
             AuthFilter.setDriverId(session, user.get().getId());
-            return "redirect:/view/form";
+            return "menu";
         } else {
             return "redirect:/login";
         }
@@ -86,7 +103,8 @@ public class ViewController extends AbstractController {
                 AuthFilter.getDriverId(session),
                 transport.getBuyer(),
                 transport.getTruck(),
-                transport.getOwner()
+                transport.getOwner(),
+                transport.getPayer()
             );
             newTransport.setLocationIn(transport.getLocationIn());
             newTransport.setDateIn(transport.getDateIn());

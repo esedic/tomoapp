@@ -27,6 +27,7 @@ import com.mood.tomoapp.domain.Driver;
 import com.mood.tomoapp.domain.Fuel;
 import com.mood.tomoapp.domain.Fueling;
 import com.mood.tomoapp.domain.Owner;
+import com.mood.tomoapp.domain.Payer;
 import com.mood.tomoapp.domain.Transport;
 import com.mood.tomoapp.domain.Truck;
 import com.mood.tomoapp.repos.BuyerRepository;
@@ -34,6 +35,7 @@ import com.mood.tomoapp.repos.DriverRepository;
 import com.mood.tomoapp.repos.FuelRepository;
 import com.mood.tomoapp.repos.FuelingRepository;
 import com.mood.tomoapp.repos.OwnerRepository;
+import com.mood.tomoapp.repos.PayerRepository;
 import com.mood.tomoapp.repos.TransportRepository;
 import com.mood.tomoapp.repos.TruckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,12 +63,15 @@ public class AbstractController {
     @Autowired
     protected FuelRepository fuels;
 
+    @Autowired
+    protected PayerRepository payers;
+
     protected static <T> List<T> toList(Iterable<T> iterable) {
         Spliterator<T> splits = iterable.spliterator();
         return StreamSupport.stream(splits, false).collect(Collectors.toList());
     }
 
-    protected void fillTransport(Transport transport, int driverId, int buyerId, int truckId, int ownerId) {
+    protected void fillTransport(Transport transport, int driverId, int buyerId, int truckId, int ownerId, int payerId) {
         Driver driver = drivers.findOne(driverId);
         transport.setDriver(driver);
 
@@ -78,6 +83,9 @@ public class AbstractController {
 
         Owner owner = owners.findOne(ownerId);
         transport.setOwner(owner);
+
+        Payer payer = payers.findOne(payerId);
+        transport.setPayer(payer);
 
         transport.setTimestamp(LocalDateTime.now());
     }

@@ -23,6 +23,7 @@ import com.mood.tomoapp.domain.Driver;
 import com.mood.tomoapp.domain.Fuel;
 import com.mood.tomoapp.domain.Fueling;
 import com.mood.tomoapp.domain.Owner;
+import com.mood.tomoapp.domain.Payer;
 import com.mood.tomoapp.domain.Transport;
 import com.mood.tomoapp.domain.Truck;
 import org.springframework.http.HttpStatus;
@@ -63,6 +64,11 @@ public class AppController extends AbstractController {
         return fuelings.findByActiveIsGreaterThan(0);
     }
 
+    @GetMapping("/payers")
+    public List<Payer> getPayers() {
+        return payers.findByActiveIsGreaterThan(0);
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/transport")
     @Transactional
@@ -73,7 +79,8 @@ public class AppController extends AbstractController {
             transport.getDriver().getId(),
             transport.getBuyer().getId(),
             transport.getTruck().getId(),
-            transport.getOwner().getId()
+            transport.getOwner().getId(),
+            transport.getPayer().getId()
         );
 
         return transports.save(transport);
