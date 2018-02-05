@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,33 +41,33 @@ import org.springframework.web.bind.annotation.RestController;
 public class AppController extends AbstractController {
 
     @GetMapping("/drivers")
-    public List<Driver> getDrivers() {
-        return drivers.findByActiveIsGreaterThan(0);
+    public List<Driver> getDrivers(@RequestParam(name = "active", defaultValue = "0") int active) {
+        return drivers.findByActiveIsGreaterThan(active);
     }
 
     @GetMapping("/trucks")
-    public List<Truck> getTrucks() {
-        return trucks.findByActiveIsGreaterThan(0);
+    public List<Truck> getTrucks(@RequestParam(name = "active", defaultValue = "0") int active) {
+        return trucks.findByActiveIsGreaterThan(active);
     }
 
     @GetMapping("/buyers")
-    public List<Buyer> getBuyers() {
-        return buyers.findByActiveIsGreaterThan(0);
+    public List<Buyer> getBuyers(@RequestParam(name = "active", defaultValue = "0") int active) {
+        return buyers.findByActiveIsGreaterThan(active);
     }
 
     @GetMapping("/owners")
-    public List<Owner> getOwners() {
-        return owners.findByActiveIsGreaterThan(0);
+    public List<Owner> getOwners(@RequestParam(name = "active", defaultValue = "0") int active) {
+        return owners.findByActiveIsGreaterThan(active);
     }
 
     @GetMapping("/fuelings")
-    public List<Fueling> getFuelings() {
-        return fuelings.findByActiveIsGreaterThan(0);
+    public List<Fueling> getFuelings(@RequestParam(name = "active", defaultValue = "0") int active) {
+        return fuelings.findByActiveIsGreaterThan(active);
     }
 
     @GetMapping("/payers")
-    public List<Payer> getPayers() {
-        return payers.findByActiveIsGreaterThan(0);
+    public List<Payer> getPayers(@RequestParam(name = "active", defaultValue = "0") int active) {
+        return payers.findByActiveIsGreaterThan(active);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
