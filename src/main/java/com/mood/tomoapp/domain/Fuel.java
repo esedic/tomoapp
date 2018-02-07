@@ -25,6 +25,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -51,6 +52,13 @@ public class Fuel {
 
     @ManyToOne
     private Driver driver;
+
+    @ManyToOne
+    @JoinColumn(name = "KrajTocenjaId")
+    private Location location;
+
+    @Column(name = "KrajTocenjaNov")
+    private String locationNew;
 
     @JsonSerialize(using = LocalDateHelper.Serializer.class)
     @JsonDeserialize(using = LocalDateHelper.Deserializer.class)
@@ -105,6 +113,22 @@ public class Fuel {
 
     public void setDriver(Driver driver) {
         this.driver = driver;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public String getLocationNew() {
+        return locationNew;
+    }
+
+    public void setLocationNew(String locationNew) {
+        this.locationNew = locationNew;
     }
 
     public LocalDate getDate() {

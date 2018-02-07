@@ -18,10 +18,12 @@ package com.mood.tomoapp.service;
 
 import java.util.List;
 
+import com.mood.tomoapp.domain.Assortment;
 import com.mood.tomoapp.domain.Buyer;
 import com.mood.tomoapp.domain.Driver;
 import com.mood.tomoapp.domain.Fuel;
 import com.mood.tomoapp.domain.Fueling;
+import com.mood.tomoapp.domain.Location;
 import com.mood.tomoapp.domain.Owner;
 import com.mood.tomoapp.domain.Payer;
 import com.mood.tomoapp.domain.Transport;
@@ -41,33 +43,43 @@ import org.springframework.web.bind.annotation.RestController;
 public class AppController extends AbstractController {
 
     @GetMapping("/drivers")
-    public List<Driver> getDrivers(@RequestParam(name = "active", defaultValue = "0") int active) {
-        return drivers.findByActiveIsGreaterThan(active);
+    public List<Driver> getDrivers(@RequestParam(name = "active", defaultValue = "-1") int active) {
+        return super.getDrivers(active);
     }
 
     @GetMapping("/trucks")
-    public List<Truck> getTrucks(@RequestParam(name = "active", defaultValue = "0") int active) {
-        return trucks.findByActiveIsGreaterThan(active);
+    public List<Truck> getTrucks(@RequestParam(name = "active", defaultValue = "-1") int active) {
+        return super.getTrucks(active);
     }
 
     @GetMapping("/buyers")
-    public List<Buyer> getBuyers(@RequestParam(name = "active", defaultValue = "0") int active) {
-        return buyers.findByActiveIsGreaterThan(active);
+    public List<Buyer> getBuyers(@RequestParam(name = "active", defaultValue = "-1") int active) {
+        return super.getBuyers(active);
     }
 
     @GetMapping("/owners")
-    public List<Owner> getOwners(@RequestParam(name = "active", defaultValue = "0") int active) {
-        return owners.findByActiveIsGreaterThan(active);
+    public List<Owner> getOwners(@RequestParam(name = "active", defaultValue = "-1") int active) {
+        return super.getOwners(active);
     }
 
     @GetMapping("/fuelings")
-    public List<Fueling> getFuelings(@RequestParam(name = "active", defaultValue = "0") int active) {
-        return fuelings.findByActiveIsGreaterThan(active);
+    public List<Fueling> getFuelings(@RequestParam(name = "active", defaultValue = "-1") int active) {
+        return super.getFuelings(active);
     }
 
     @GetMapping("/payers")
-    public List<Payer> getPayers(@RequestParam(name = "active", defaultValue = "0") int active) {
-        return payers.findByActiveIsGreaterThan(active);
+    public List<Payer> getPayers(@RequestParam(name = "active", defaultValue = "-1") int active) {
+        return super.getPayers(active);
+    }
+
+    @GetMapping("/assortiments")
+    public List<Assortment> getAssortments(@RequestParam(name = "active", defaultValue = "-1") int active) {
+        return super.getAssortments(active);
+    }
+
+    @GetMapping("/locations")
+    public List<Location> getLocations(@RequestParam(name = "active", defaultValue = "-1") int active) {
+        return super.getLocations(active);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -81,7 +93,10 @@ public class AppController extends AbstractController {
             transport.getBuyer().getId(),
             transport.getTruck().getId(),
             transport.getOwner().getId(),
-            transport.getPayer().getId()
+            transport.getPayer().getId(),
+            transport.getAssortment().getId(),
+            transport.getLocationIn().getId(),
+            transport.getLocationOut().getId()
         );
 
         return transports.save(transport);
@@ -95,7 +110,8 @@ public class AppController extends AbstractController {
         fillFuel(fuel,
             fuel.getDriver().getId(),
             fuel.getTruck().getId(),
-            fuel.getFueling().getId()
+            fuel.getFueling().getId(),
+            fuel.getLocation().getId()
         );
 
         return fuels.save(fuel);

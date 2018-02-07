@@ -29,20 +29,20 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "Tocenje")
-public class Fueling extends Activeable {
+@Table(name = "Sortiment")
+public class Assortment extends Activeable {
 
     @Id
-    @Column(name = "TocenjeId")
+    @Column(name = "SortimentId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "Tocenje")
-    private String fueling;
+    @Column(name = "Sortiment")
+    private String assortment;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "fueling")
-    private Set<Fuel> fuels;
+    @OneToMany(mappedBy = "assortment")
+    private Set<Transport> transports;
 
     public Integer getId() {
         return id;
@@ -52,19 +52,19 @@ public class Fueling extends Activeable {
         this.id = id;
     }
 
-    public String getFueling() {
-        return fueling;
+    public String getAssortment() {
+        return assortment;
     }
 
-    public void setFueling(String fueling) {
-        this.fueling = fueling;
+    public void setAssortment(String assortment) {
+        this.assortment = assortment;
     }
 
-    public Set<Fuel> getFuels() {
-        return fuels;
+    public Set<Transport> getTransports() {
+        return transports;
     }
 
-    public void setFuels(Set<Fuel> fuels) {
-        this.fuels = fuels;
+    public void setTransports(Set<Transport> transports) {
+        this.transports = transports;
     }
 }

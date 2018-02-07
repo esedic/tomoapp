@@ -25,6 +25,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -58,8 +59,12 @@ public class Transport {
     @ManyToOne
     private Payer payer;
 
-    @Column(name = "KrajNakladanja")
-    private String locationIn;
+    @ManyToOne
+    @JoinColumn(name = "KrajNakladanjaId")
+    private Location locationIn;
+
+    @Column(name = "KrajNakladanjaNov")
+    private String locationInNew;
 
     @JsonSerialize(using = LocalDateHelper.Serializer.class)
     @JsonDeserialize(using = LocalDateHelper.Deserializer.class)
@@ -67,8 +72,12 @@ public class Transport {
     @Column(name = "DatumNakladanja")
     private LocalDate dateIn;
 
-    @Column(name = "KrajRazkladanja")
-    private String locationOut;
+    @ManyToOne
+    @JoinColumn(name = "KrajRazkladanjaId")
+    private Location locationOut;
+
+    @Column(name = "KrajRazkladanjaNov")
+    private String locationOutNew;
 
     @JsonSerialize(using = LocalDateHelper.Serializer.class)
     @JsonDeserialize(using = LocalDateHelper.Deserializer.class)
@@ -76,8 +85,8 @@ public class Transport {
     @Column(name = "DatumRazkladanja")
     private LocalDate dateOut;
 
-    @Column(name = "Sortiment")
-    private String assortment;
+    @ManyToOne
+    private Assortment assortment;
 
     @Column(name = "Kolicina")
     private Double quantity;
@@ -138,12 +147,20 @@ public class Transport {
         this.payer = payer;
     }
 
-    public String getLocationIn() {
+    public Location getLocationIn() {
         return locationIn;
     }
 
-    public void setLocationIn(String locationIn) {
+    public void setLocationIn(Location locationIn) {
         this.locationIn = locationIn;
+    }
+
+    public String getLocationInNew() {
+        return locationInNew;
+    }
+
+    public void setLocationInNew(String locationInNew) {
+        this.locationInNew = locationInNew;
     }
 
     public LocalDate getDateIn() {
@@ -154,12 +171,20 @@ public class Transport {
         this.dateIn = dateIn;
     }
 
-    public String getLocationOut() {
+    public Location getLocationOut() {
         return locationOut;
     }
 
-    public void setLocationOut(String locationOut) {
+    public void setLocationOut(Location locationOut) {
         this.locationOut = locationOut;
+    }
+
+    public String getLocationOutNew() {
+        return locationOutNew;
+    }
+
+    public void setLocationOutNew(String locationOutNew) {
+        this.locationOutNew = locationOutNew;
     }
 
     public LocalDate getDateOut() {
@@ -170,11 +195,11 @@ public class Transport {
         this.dateOut = dateOut;
     }
 
-    public String getAssortment() {
+    public Assortment getAssortment() {
         return assortment;
     }
 
-    public void setAssortment(String assortment) {
+    public void setAssortment(Assortment assortment) {
         this.assortment = assortment;
     }
 

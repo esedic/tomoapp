@@ -29,19 +29,30 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "Tocenje")
-public class Fueling extends Activeable {
+@Table(name = "Kraj")
+public class Location extends Activeable {
 
     @Id
-    @Column(name = "TocenjeId")
+    @Column(name = "KrajId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "Tocenje")
-    private String fueling;
+    @Column(name = "Kraj")
+    private String location;
+
+    @Column(name = "Rang")
+    private int rank;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "fueling")
+    @OneToMany(mappedBy = "locationIn")
+    private Set<Transport> transportsIn;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "locationOut")
+    private Set<Transport> transportsOut;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "location")
     private Set<Fuel> fuels;
 
     public Integer getId() {
@@ -52,12 +63,36 @@ public class Fueling extends Activeable {
         this.id = id;
     }
 
-    public String getFueling() {
-        return fueling;
+    public String getLocation() {
+        return location;
     }
 
-    public void setFueling(String fueling) {
-        this.fueling = fueling;
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public Set<Transport> getTransportsIn() {
+        return transportsIn;
+    }
+
+    public void setTransportsIn(Set<Transport> transportsIn) {
+        this.transportsIn = transportsIn;
+    }
+
+    public Set<Transport> getTransportsOut() {
+        return transportsOut;
+    }
+
+    public void setTransportsOut(Set<Transport> transportsOut) {
+        this.transportsOut = transportsOut;
     }
 
     public Set<Fuel> getFuels() {

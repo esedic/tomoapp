@@ -40,7 +40,15 @@
     </div>
     <div>
         <label th:for="${#ids.next('locationIn')}">Kraj nakladanja</label>
-        <input type="text" th:field="*{locationIn}"/>
+        <select th:field="*{locationIn}">
+            <option th:each="location : ${locations}"
+                    th:value="${location.id}"
+                    th:text="${location.location}"/>
+        </select>
+    </div>
+    <div>
+        <label th:for="${#ids.next('locationInNew')}">Kraj nakladanja (nov)</label>
+        <input type="text" th:field="*{locationInNew}"/>
     </div>
     <div>
         <label th:for="${#ids.next('dateIn')}">Datum nakladanja</label>
@@ -48,7 +56,15 @@
     </div>
     <div>
         <label th:for="${#ids.next('locationOut')}">Kraj razkladanja</label>
-        <input type="text" th:field="*{locationOut}"/>
+        <select th:field="*{locationOut}">
+            <option th:each="location : ${locations}"
+                    th:value="${location.id}"
+                    th:text="${location.location}"/>
+        </select>
+    </div>
+    <div>
+        <label th:for="${#ids.next('locationOutNew')}">Kraj razkladanja (nov)</label>
+        <input type="text" th:field="*{locationOutNew}"/>
     </div>
     <div>
         <label th:for="${#ids.next('dateOut')}">Datum razkladanja</label>
@@ -56,7 +72,11 @@
     </div>
     <div>
         <label th:for="${#ids.next('assortment')}">Sortiment</label>
-        <input type="text" th:field="*{assortment}"/>
+        <select th:field="*{assortment}">
+            <option th:each="assortment : ${assortments}"
+                    th:value="${assortment.id}"
+                    th:text="${assortment.assortment}"/>
+        </select>
     </div>
     <div>
         <label th:for="${#ids.next('quantity')}">Kolicina</label>

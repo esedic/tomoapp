@@ -23,6 +23,18 @@
         </select>
     </div>
     <div>
+        <label th:for="${#ids.next('location')}">Kraj</label>
+        <select th:field="*{location}">
+            <option th:each="location : ${locations}"
+                    th:value="${location.id}"
+                    th:text="${location.location}"/>
+        </select>
+    </div>
+    <div>
+        <label th:for="${#ids.next('locationNew')}">Kraj tocenja (nov)</label>
+        <input type="text" th:field="*{locationNew}"/>
+    </div>
+    <div>
         <label th:for="${#ids.next('date')}">Datum tocenja</label>
         <input type="text" th:field="*{date}"/>
     </div>

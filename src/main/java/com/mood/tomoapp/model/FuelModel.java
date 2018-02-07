@@ -25,6 +25,10 @@ public class FuelModel {
 
     private Integer driver;
 
+    private Integer location;
+
+    private String locationNew;
+
     private LocalDate date;
 
     private Double quantity;
@@ -57,6 +61,22 @@ public class FuelModel {
 
     public void setDriver(Integer driver) {
         this.driver = driver;
+    }
+
+    public Integer getLocation() {
+        return location;
+    }
+
+    public void setLocation(Integer location) {
+        this.location = location;
+    }
+
+    public String getLocationNew() {
+        return locationNew;
+    }
+
+    public void setLocationNew(String locationNew) {
+        this.locationNew = locationNew;
     }
 
     public LocalDate getDate() {

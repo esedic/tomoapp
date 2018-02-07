@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Placnik")
-public class Payer {
+public class Payer extends Activeable {
 
     @Id
     @Column(name = "PlacnikId")
@@ -39,9 +39,6 @@ public class Payer {
 
     @Column(name = "Placnik")
     private String payer;
-
-    @Column(name = "Aktiven")
-    private int active;
 
     @JsonIgnore
     @OneToMany(mappedBy = "payer")
@@ -61,14 +58,6 @@ public class Payer {
 
     public void setPayer(String payer) {
         this.payer = payer;
-    }
-
-    public int getActive() {
-        return active;
-    }
-
-    public void setActive(int active) {
-        this.active = active;
     }
 
     public Set<Transport> getTransports() {

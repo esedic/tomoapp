@@ -26,13 +26,15 @@ public class TransportModel {
     private Integer owner;
     private Integer payer;
 
-    private String locationIn;
+    private Integer locationIn;
+    private String locationInNew;
     private LocalDate dateIn;
 
-    private String locationOut;
+    private Integer locationOut;
+    private String locationOutNew;
     private LocalDate dateOut;
 
-    private String assortment;
+    private Integer assortment;
 
     private Double quantity;
 
@@ -78,12 +80,20 @@ public class TransportModel {
         this.payer = payer;
     }
 
-    public String getLocationIn() {
+    public Integer getLocationIn() {
         return locationIn;
     }
 
-    public void setLocationIn(String locationIn) {
+    public void setLocationIn(Integer locationIn) {
         this.locationIn = locationIn;
+    }
+
+    public String getLocationInNew() {
+        return locationInNew;
+    }
+
+    public void setLocationInNew(String locationInNew) {
+        this.locationInNew = locationInNew;
     }
 
     public LocalDate getDateIn() {
@@ -94,12 +104,20 @@ public class TransportModel {
         this.dateIn = dateIn;
     }
 
-    public String getLocationOut() {
+    public Integer getLocationOut() {
         return locationOut;
     }
 
-    public void setLocationOut(String locationOut) {
+    public void setLocationOut(Integer locationOut) {
         this.locationOut = locationOut;
+    }
+
+    public String getLocationOutNew() {
+        return locationOutNew;
+    }
+
+    public void setLocationOutNew(String locationOutNew) {
+        this.locationOutNew = locationOutNew;
     }
 
     public LocalDate getDateOut() {
@@ -110,11 +128,11 @@ public class TransportModel {
         this.dateOut = dateOut;
     }
 
-    public String getAssortment() {
+    public Integer getAssortment() {
         return assortment;
     }
 
-    public void setAssortment(String assortment) {
+    public void setAssortment(Integer assortment) {
         this.assortment = assortment;
     }
 

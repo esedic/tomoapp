@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Voznik")
-public class Driver {
+public class Driver extends Activeable {
 
     @Id
     @Column(name = "VoznikId")
@@ -42,9 +42,6 @@ public class Driver {
 
     @Column(name = "Geslo")
     private String password;
-
-    @Column(name = "Aktiven")
-    private int active;
 
     @JsonIgnore
     @OneToMany(mappedBy = "driver")
@@ -76,14 +73,6 @@ public class Driver {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getActive() {
-        return active;
-    }
-
-    public void setActive(int active) {
-        this.active = active;
     }
 
     public Set<Transport> getTransports() {

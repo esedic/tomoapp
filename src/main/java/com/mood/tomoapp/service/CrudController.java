@@ -16,9 +16,11 @@
 
 package com.mood.tomoapp.service;
 
+import com.mood.tomoapp.domain.Assortment;
 import com.mood.tomoapp.domain.Buyer;
 import com.mood.tomoapp.domain.Driver;
 import com.mood.tomoapp.domain.Fueling;
+import com.mood.tomoapp.domain.Location;
 import com.mood.tomoapp.domain.Owner;
 import com.mood.tomoapp.domain.Payer;
 import com.mood.tomoapp.domain.Truck;
@@ -69,6 +71,18 @@ public class CrudController extends AbstractController {
     @PostMapping("/addPayer")
     public Payer add(@RequestBody Payer payer) {
         return payers.save(payer);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/addAssortment")
+    public Assortment add(@RequestBody Assortment assortment) {
+        return assortments.save(assortment);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/addLocation")
+    public Location add(@RequestBody Location location) {
+        return locations.save(location);
     }
 
 }

@@ -53,11 +53,12 @@ public class ViewController extends AbstractController {
         model.addAttribute("transport", new TransportModel());
 
         // drop downs
-        model.addAttribute("drivers", drivers.findByActiveIsGreaterThan(0));
-        model.addAttribute("trucks", trucks.findByActiveIsGreaterThan(0));
-        model.addAttribute("buyers", buyers.findByActiveIsGreaterThan(0));
-        model.addAttribute("owners", owners.findByActiveIsGreaterThan(0));
-        model.addAttribute("payers", payers.findByActiveIsGreaterThan(0));
+        model.addAttribute("trucks", getTrucks(0));
+        model.addAttribute("buyers", getBuyers(0));
+        model.addAttribute("owners", getOwners(0));
+        model.addAttribute("payers", getPayers(0));
+        model.addAttribute("assortments", getAssortments(0));
+        model.addAttribute("locations", getLocations(0));
 
         return "transport";
     }
@@ -68,9 +69,9 @@ public class ViewController extends AbstractController {
         model.addAttribute("fuel", new FuelModel());
 
         // drop downs
-        model.addAttribute("drivers", drivers.findByActiveIsGreaterThan(0));
-        model.addAttribute("trucks", trucks.findByActiveIsGreaterThan(0));
-        model.addAttribute("fuelings", fuelings.findByActiveIsGreaterThan(0));
+        model.addAttribute("trucks", getTrucks(0));
+        model.addAttribute("fuelings", getFuelings(0));
+        model.addAttribute("locations", getLocations(0));
 
         return "fuel";
     }
@@ -104,13 +105,15 @@ public class ViewController extends AbstractController {
                 transport.getBuyer(),
                 transport.getTruck(),
                 transport.getOwner(),
-                transport.getPayer()
+                transport.getPayer(),
+                transport.getAssortment(),
+                transport.getLocationIn(),
+                transport.getLocationOut()
             );
-            newTransport.setLocationIn(transport.getLocationIn());
+            newTransport.setLocationInNew(transport.getLocationInNew());
             newTransport.setDateIn(transport.getDateIn());
-            newTransport.setLocationOut(transport.getLocationOut());
+            newTransport.setLocationOutNew(transport.getLocationOutNew());
             newTransport.setDateOut(transport.getDateOut());
-            newTransport.setAssortment(transport.getAssortment());
             newTransport.setQuantity(transport.getQuantity());
             newTransport.setRemark(transport.getRemark());
             transports.save(newTransport);
@@ -131,8 +134,10 @@ public class ViewController extends AbstractController {
                 newFuel,
                 AuthFilter.getDriverId(session),
                 fuel.getTruck(),
-                fuel.getFueling()
+                fuel.getFueling(),
+                fuel.getLocation()
             );
+            newFuel.setLocationNew(fuel.getLocationNew());
             newFuel.setDate(fuel.getDate());
             newFuel.setQuantity(fuel.getQuantity());
             newFuel.setKm(fuel.getKm());
