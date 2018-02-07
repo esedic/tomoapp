@@ -19,17 +19,25 @@ package com.mood.tomoapp;
 import java.util.Arrays;
 import java.util.Collections;
 
+import com.mood.tomoapp.cache.ActiveableKeyGenerator;
+import com.mood.tomoapp.cache.TempCacheManager;
 import com.mood.tomoapp.mvc.ApiFilter;
 import com.mood.tomoapp.mvc.AuthFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
 @EnableWebMvc
+@EnableCaching
+@EnableScheduling
 public class TomoApplication {
 
     @Value("${api.token}")
@@ -53,34 +61,13 @@ public class TomoApplication {
         return frb;
     }
 
-    /*
     @Bean
-    public EmbeddedServletContainerFactory servletContainer() {
-        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {
-            @Override
-            protected void postProcessContext(Context context) {
-                SecurityConstraint securityConstraint = new SecurityConstraint();
-                securityConstraint.setUserConstraint("CONFIDENTIAL");
-                SecurityCollection collection = new SecurityCollection();
-                collection.addPattern("/view/*");
-                collection.addPattern("/api/*");
-                collection.addPattern("/crud/*");
-                securityConstraint.addCollection(collection);
-                context.addConstraint(securityConstraint);
-            }
-        };
-
-        tomcat.addAdditionalTomcatConnectors(initiateHttpConnector());
-        return tomcat;
+    public CacheManager cacheManager() {
+        return new TempCacheManager();
     }
 
-    private Connector initiateHttpConnector() {
-        Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-        connector.setScheme("http");
-        connector.setPort(8080);
-        connector.setSecure(false);
-        connector.setRedirectPort(8443);
-        return connector;
+    @Bean
+    public KeyGenerator keyGenerator() {
+        return new ActiveableKeyGenerator();
     }
-    */
 }
