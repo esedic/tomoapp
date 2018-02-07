@@ -106,7 +106,7 @@ public class AbstractController {
     }
 
     protected List<Location> getLocations(int active) {
-        return locations.findByActiveIsGreaterThan(active, new Sort(new Sort.Order(Sort.Direction.DESC, "rank"), new Sort.Order("location")));
+        return locations.findByActiveIsGreaterThan(active, new Sort("rank", "location"));
     }
     
     protected static <T> List<T> toList(Iterable<T> iterable) {
