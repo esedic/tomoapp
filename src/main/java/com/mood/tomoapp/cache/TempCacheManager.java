@@ -8,7 +8,6 @@ import java.util.concurrent.ConcurrentMap;
 import org.springframework.cache.Cache;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
-import org.springframework.scheduling.annotation.Scheduled;
 
 /**
  * @author <a href="mailto:ales.justin@jboss.org">Ales Justin</a>
@@ -16,7 +15,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class TempCacheManager extends ConcurrentMapCacheManager {
     private final ConcurrentMap<String, ConcurrentMap<Object, Object>> maps = new ConcurrentHashMap<>();
 
-    @Scheduled(fixedRate = 1000 * 60 * 15) // every 15min
     public void purge() {
         Set<ConcurrentMap> set = new HashSet<>(maps.values());
         for (ConcurrentMap cm : set) {

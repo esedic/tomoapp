@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StatusController {
 
-    @RequestMapping("/_ah/health")
+    @RequestMapping({"/health", "/_ah/health"})
     public String health() {
         return "OK";
     }

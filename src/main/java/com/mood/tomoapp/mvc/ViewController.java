@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import com.mood.tomoapp.cache.TempCacheManager;
 import com.mood.tomoapp.config.LocalDateHelper;
 import com.mood.tomoapp.config.LocalDateTimeHelper;
 import com.mood.tomoapp.domain.Driver;
@@ -15,6 +16,7 @@ import com.mood.tomoapp.model.DriverModel;
 import com.mood.tomoapp.model.FuelModel;
 import com.mood.tomoapp.model.TransportModel;
 import com.mood.tomoapp.service.AbstractController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -31,6 +33,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ViewController extends AbstractController {
 
+    @Autowired
+    private TempCacheManager cacheManager;
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(LocalDate.class, new LocalDateHelper());
@@ -45,6 +50,13 @@ public class ViewController extends AbstractController {
     @GetMapping("/view/menu")
     public String menu() {
         return "menu";
+    }
+
+    @GetMapping("/view/purge")
+    public String purge(final ModelMap model) {
+        cacheManager.purge();
+        model.addAttribute("status", "PURGED");
+        return "status";
     }
 
     @GetMapping("/view/tf")

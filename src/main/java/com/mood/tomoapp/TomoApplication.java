@@ -27,17 +27,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
 @EnableWebMvc
 @EnableCaching
-@EnableScheduling
 public class TomoApplication {
 
     @Value("${api.token}")
@@ -62,7 +59,7 @@ public class TomoApplication {
     }
 
     @Bean
-    public CacheManager cacheManager() {
+    public TempCacheManager cacheManager() {
         return new TempCacheManager();
     }
 
