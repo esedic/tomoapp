@@ -31,7 +31,7 @@
         </select>
     </div>
     <div>
-        <label th:for="${#ids.next('payer')}">Placnik</label>
+        <label th:for="${#ids.next('payer')}">Plačnik</label>
         <select th:field="*{payer}">
             <option th:each="payer : ${payers}"
                     th:value="${payer.id}"
@@ -79,15 +79,15 @@
         </select>
     </div>
     <div>
-        <label th:for="${#ids.next('quantity')}">Kolicina</label>
+        <label th:for="${#ids.next('quantity')}">Količina</label>
         <input type="text" th:field="*{quantity}"/>
     </div>
     <div>
         <label th:for="${#ids.next('remark')}">Opomba</label>
         <input type="text" th:field="*{remark}"/>
     </div>
-    <button type="submit" name="transportbtn">Poslji</button>
-    <button type="reset" name="transportbtn_reset">Brisi</button>
+    <button type="submit" name="transportbtn">Pošlji</button>
+    <button type="reset" name="transportbtn_reset">Briši</button>
 </form>
 <p/>
 <a href="/view/menu">[Nazaj]</a>

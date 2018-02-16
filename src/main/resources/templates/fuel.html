@@ -15,7 +15,7 @@
         </select>
     </div>
     <div>
-        <label th:for="${#ids.next('fueling')}">Tocenje</label>
+        <label th:for="${#ids.next('fueling')}">Točenje</label>
         <select th:field="*{fueling}">
             <option th:each="fueling : ${fuelings}"
                     th:value="${fueling.id}"
@@ -31,15 +31,15 @@
         </select>
     </div>
     <div>
-        <label th:for="${#ids.next('locationNew')}">Kraj tocenja (nov)</label>
+        <label th:for="${#ids.next('locationNew')}">Kraj točenja (nov)</label>
         <input type="text" th:field="*{locationNew}"/>
     </div>
     <div>
-        <label th:for="${#ids.next('date')}">Datum tocenja</label>
+        <label th:for="${#ids.next('date')}">Datum točenja</label>
         <input type="text" th:field="*{date}"/>
     </div>
     <div>
-        <label th:for="${#ids.next('quantity')}">Kolicina</label>
+        <label th:for="${#ids.next('quantity')}">Količina</label>
         <input type="text" th:field="*{quantity}"/>
     </div>
     <div>
@@ -54,8 +54,8 @@
         <label th:for="${#ids.next('remark')}">Opomba</label>
         <input type="text" th:field="*{remark}"/>
     </div>
-    <button type="submit" name="fuelbtn">Poslji</button>
-    <button type="reset" name="fuelbtn_reset">Brisi</button>
+    <button type="submit" name="fuelbtn">Pošlji</button>
+    <button type="reset" name="fuelbtn_reset">Briši</button>
 </form>
 <p/>
 <a href="/view/menu">[Nazaj]</a>
