@@ -1,63 +1,69 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Tomo Les app</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
-<form action="#" th:action="@{/view/fuel}" th:object="${fuel}" method="post">
-    <div>
-        <label th:for="${#ids.next('truck')}">Kamion</label>
-        <select th:field="*{truck}">
-            <option th:each="truck : ${trucks}"
-                    th:value="${truck.id}"
-                    th:text="${truck.truck}"/>
-        </select>
-    </div>
-    <div>
-        <label th:for="${#ids.next('fueling')}">Točenje</label>
-        <select th:field="*{fueling}">
-            <option th:each="fueling : ${fuelings}"
-                    th:value="${fueling.id}"
-                    th:text="${fueling.fueling}"/>
-        </select>
-    </div>
-    <div>
-        <label th:for="${#ids.next('location')}">Kraj</label>
-        <select th:field="*{location}">
-            <option th:each="location : ${locations}"
-                    th:value="${location.id}"
-                    th:text="${location.location}"/>
-        </select>
-    </div>
-    <div>
-        <label th:for="${#ids.next('locationNew')}">Kraj točenja (nov)</label>
-        <input type="text" th:field="*{locationNew}"/>
-    </div>
-    <div>
-        <label th:for="${#ids.next('date')}">Datum točenja</label>
-        <input type="text" th:field="*{date}"/>
-    </div>
-    <div>
-        <label th:for="${#ids.next('quantity')}">Količina</label>
-        <input type="text" th:field="*{quantity}"/>
-    </div>
-    <div>
-        <label th:for="${#ids.next('km')}">Km</label>
-        <input type="text" th:field="*{km}"/>
-    </div>
-    <div>
-        <label th:for="${#ids.next('facture')}">FakturaSt</label>
-        <input type="text" th:field="*{facture}"/>
-    </div>
-    <div>
-        <label th:for="${#ids.next('remark')}">Opomba</label>
-        <input type="text" th:field="*{remark}"/>
-    </div>
-    <button type="submit" name="fuelbtn">Pošlji</button>
-    <button type="reset" name="fuelbtn_reset">Briši</button>
-</form>
-<p/>
-<a href="/view/menu">[Nazaj]</a>
+    <form action="#" th:action="@{/view/fuel}" th:object="${fuel}" method="post" class="uk-form uk-form-horizontal">
+        <div class="uk-form-row">
+            <label class="uk-form-label" th:for="${#ids.next('truck')}">Kamion</label>
+            <div class="uk-form-controls">
+                <select th:field="*{truck}">
+                    <option th:each="truck : ${trucks}" th:value="${truck.id}" th:text="${truck.truck}" />
+                </select>
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <label class="uk-form-label" th:for="${#ids.next('fueling')}">Tocenje</label>
+            <div class="uk-form-controls">
+                <select th:field="*{fueling}">
+                    <option th:each="fueling : ${fuelings}" th:value="${fueling.id}" th:text="${fueling.fueling}" />
+                </select>
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <label class="uk-form-label" th:for="${#ids.next('date')}">Datum tocenja</label>
+            <div class="uk-form-controls">
+                <input type="text" th:field="*{date}" />
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <label class="uk-form-label" th:for="${#ids.next('quantity')}">Kolicina</label>
+            <div class="uk-form-controls">
+                <input type="text" th:field="*{quantity}" />
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <label class="uk-form-label" th:for="${#ids.next('km')}">Km</label>
+            <div class="uk-form-controls">
+                <input type="text" th:field="*{km}" />
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <label class="uk-form-label" th:for="${#ids.next('facture')}">FakturaSt</label>
+            <div class="uk-form-controls">
+                <input type="text" th:field="*{facture}" />
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <label class="uk-form-label" th:for="${#ids.next('remark')}">Opomba</label>
+            <div class="uk-form-controls">
+                <input type="text" th:field="*{remark}" />
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <div class="uk-form-controls">
+                <button class="uk-button" type="submit" name="fuelbtn">Poslji</button>
+                <button class="uk-button" type="reset" name="fuelbtn_reset">Brisi</button>
+            </div>
+        </div>
+    </form>
+    <a href="/view/menu">[Nazaj]</a>
 </body>
+
 </html>

@@ -2,94 +2,101 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Tomo Les app</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<form action="#" th:action="@{/view/transport}" th:object="${transport}" method="post">
-    <div>
-        <label th:for="${#ids.next('truck')}">Kamion</label>
+    <form action="#" th:action="@{/view/transport}" th:object="${transport}" method="post" class="uk-form uk-form-horizontal">
+      <div class="uk-form-row">
+        <label class="uk-form-label" th:for="${#ids.next('truck')}">Kamion</label>
+        <div class="uk-form-controls">
         <select th:field="*{truck}">
             <option th:each="truck : ${trucks}"
                     th:value="${truck.id}"
                     th:text="${truck.truck}"/>
         </select>
     </div>
-    <div>
-        <label th:for="${#ids.next('buyer')}">Kupec</label>
+      </div>
+      <div class="uk-form-row">
+        <label class="uk-form-label" th:for="${#ids.next('buyer')}">Kupec</label>
+        <div class="uk-form-controls">
         <select th:field="*{buyer}">
             <option th:each="buyer : ${buyers}"
                     th:value="${buyer.id}"
                     th:text="${buyer.buyer}"/>
         </select>
     </div>
-    <div>
-        <label th:for="${#ids.next('owner')}">Lastnik</label>
+      </div>
+      <div class="uk-form-row">
+        <label class="uk-form-label" th:for="${#ids.next('owner')}">Lastnik</label>
+        <div class="uk-form-controls">
         <select th:field="*{owner}">
             <option th:each="owner : ${owners}"
                     th:value="${owner.id}"
                     th:text="${owner.owner}"/>
         </select>
     </div>
-    <div>
-        <label th:for="${#ids.next('payer')}">Plačnik</label>
+      </div>
+      <div class="uk-form-row">
+        <label class="uk-form-label"  th:for="${#ids.next('payer')}">Placnik</label>
+        <div class="uk-form-controls">
         <select th:field="*{payer}">
             <option th:each="payer : ${payers}"
                     th:value="${payer.id}"
                     th:text="${payer.payer}"/>
         </select>
     </div>
-    <div>
-        <label th:for="${#ids.next('locationIn')}">Kraj nakladanja</label>
-        <select th:field="*{locationIn}">
-            <option th:each="location : ${locations}"
-                    th:value="${location.id}"
-                    th:text="${location.location}"/>
-        </select>
+      </div>
+      <div class="uk-form-row">
+        <label class="uk-form-label" th:for="${#ids.next('locationIn')}">Kraj nakladanja</label>
+        <div class="uk-form-controls">
+        <input type="text" th:field="*{locationIn}"/>
     </div>
-    <div>
-        <label th:for="${#ids.next('locationInNew')}">Kraj nakladanja (nov)</label>
-        <input type="text" th:field="*{locationInNew}"/>
-    </div>
-    <div>
-        <label th:for="${#ids.next('dateIn')}">Datum nakladanja</label>
+      </div>
+      <div class="uk-form-row">
+        <label class="uk-form-label" th:for="${#ids.next('dateIn')}">Datum nakladanja</label>
+        <div class="uk-form-controls">
         <input type="text" th:field="*{dateIn}"/>
     </div>
-    <div>
-        <label th:for="${#ids.next('locationOut')}">Kraj razkladanja</label>
-        <select th:field="*{locationOut}">
-            <option th:each="location : ${locations}"
-                    th:value="${location.id}"
-                    th:text="${location.location}"/>
-        </select>
+      </div>
+      <div class="uk-form-row">
+        <label class="uk-form-label" th:for="${#ids.next('locationOut')}">Kraj razkladanja</label>
+        <div class="uk-form-controls">
+        <input type="text" th:field="*{locationOut}"/>
     </div>
-    <div>
-        <label th:for="${#ids.next('locationOutNew')}">Kraj razkladanja (nov)</label>
-        <input type="text" th:field="*{locationOutNew}"/>
-    </div>
-    <div>
-        <label th:for="${#ids.next('dateOut')}">Datum razkladanja</label>
+      </div>
+      <div class="uk-form-row">
+        <label class="uk-form-label" th:for="${#ids.next('dateOut')}">Datum razkladanja</label>
+        <div class="uk-form-controls">
         <input type="text" th:field="*{dateOut}"/>
     </div>
-    <div>
-        <label th:for="${#ids.next('assortment')}">Sortiment</label>
-        <select th:field="*{assortment}">
-            <option th:each="assortment : ${assortments}"
-                    th:value="${assortment.id}"
-                    th:text="${assortment.assortment}"/>
-        </select>
+      </div>
+      <div class="uk-form-row">
+        <label class="uk-form-label" th:for="${#ids.next('assortment')}">Sortiment</label>
+        <div class="uk-form-controls">
+        <input type="text" th:field="*{assortment}"/>
     </div>
-    <div>
-        <label th:for="${#ids.next('quantity')}">Količina</label>
+      </div>
+      <div class="uk-form-row">
+        <label class="uk-form-label" th:for="${#ids.next('quantity')}">Kolicina</label>
+        <div class="uk-form-controls">
         <input type="text" th:field="*{quantity}"/>
     </div>
-    <div>
-        <label th:for="${#ids.next('remark')}">Opomba</label>
+      </div>
+      <div class="uk-form-row">
+        <label class="uk-form-label" th:for="${#ids.next('remark')}">Opomba</label>
+        <div class="uk-form-controls">
         <input type="text" th:field="*{remark}"/>
     </div>
-    <button type="submit" name="transportbtn">Pošlji</button>
-    <button type="reset" name="transportbtn_reset">Briši</button>
+      </div>
+      <div class="uk-form-row">
+        <div class="uk-form-controls">
+          <button class="uk-button" type="submit" name="transportbtn">Poslji</button>
+          <button class="uk-button" type="reset" name="transportbtn_reset">Brisi</button>
+        </div>
+      </div>
 </form>
-<p/>
 <a href="/view/menu">[Nazaj]</a>
 </body>
 </html>

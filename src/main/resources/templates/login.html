@@ -1,20 +1,33 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Tomo Les app - login</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
-<form action="#" th:action="@{/signin}" th:object="${driver}" method="post">
-    <div>
-        <label th:for="${#ids.next('driver')}">Voznik</label>
-        <input type="text" th:field="*{driver}"/>
-    </div>
-    <div>
-        <label th:for="${#ids.next('password')}">Geslo</label>
-        <input type="password" th:field="*{password}"/>
-    </div>
-    <button type="submit" name="loginbtn">Prijavi!</button>
-</form>
+    <form action="#" th:action="@{/signin}" th:object="${driver}" method="post" class="uk-form uk-form-horizontal">
+        <div class="uk-form-row">
+            <label class="uk-form-label" th:for="${#ids.next('driver')}">Voznik</label>
+            <div class="uk-form-controls">
+                <input type="text" th:field="*{driver}" />
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <label class="uk-form-label" th:for="${#ids.next('password')}">Geslo</label>
+            <div class="uk-form-controls">
+                <input type="password" th:field="*{password}" />
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <div class="uk-form-controls">
+                <button class="uk-button" type="submit" name="loginbtn">Prijavi!</button>
+            </div>
+        </div>
+    </form>
 </body>
+
 </html>
